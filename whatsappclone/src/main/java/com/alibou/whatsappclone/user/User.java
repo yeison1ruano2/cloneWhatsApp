@@ -17,7 +17,15 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="users")
+@NamedQuery(name=UserConstants.FIND_USER_BY_EMAIL,
+            query="SELECT U FROM User u WHERE u.email = :email")
+@NamedQuery(name=UserConstants.FIND_ALL_USERS_EXCEPT_SELF,
+            query="SELECT u FROM User U wHERE u.id != : publicId")
+@NamedQuery(name=UserConstants.FIND_USER_BY_PUBLIC_ID,
+            query="SELECT u FROM User U wHERE u.id = : publicId")
 public class User extends BaseAuditingEntity {
+
+  private static final int LAST_ACTIVE_INTERVAL = 5;
 
   @Id
   private String id;
@@ -33,6 +41,6 @@ public class User extends BaseAuditingEntity {
 
   @Transient
   public boolean isUserOnLine(){
-    return lastSeen != null && lastSeen.isBefore(LocalDateTime.now());
+    return lastSeen != null && lastSeen.isBefore(LocalDateTime.now().minusMinutes(LAST_ACTIVE_INTERVAL));
   }
 }
