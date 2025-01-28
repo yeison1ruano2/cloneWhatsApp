@@ -1,4 +1,8 @@
 spring:
+  application:
+    file:
+      uploads:
+        media-output-path: ./uploads
   datasource:
     url: jdbc:postgresql://localhost:5432/whatsapp_clone
     username: root
@@ -9,7 +13,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   flyway:
@@ -23,8 +27,5 @@ spring:
     multipart:
       max-file-size: 50MB
 
-application:
-  file:
-    uploads:
-      media-output.path: ./uploads
+
 
