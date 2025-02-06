@@ -16,5 +16,15 @@ body{
 }
 
 .cursor-pointer{
-  cursor: pointer
+  cursor: pointer;
+}
+
+.user-img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  > img {
+    width: 100%;
+  }
 }
